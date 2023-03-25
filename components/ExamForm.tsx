@@ -17,7 +17,7 @@ export function ExamForm() {
   const setAnswers = useSetRecoilState(answersState);
   const [exam, setExam] = useRecoilState(examState);
   const [loading, setLoading] = useState(false);
-  const [showAnswers, setShowAnswers] = useState(true);
+  const [showAnswers, setShowAnswers] = useState(false);
   const [numberOfQuestions, setNumberOfQuestions] = useState<number>();
   const [examName, setExamName] = useState<string>();
   const [multipleChoiceQuestions, setMultipleChoiceQuestions] = useState<

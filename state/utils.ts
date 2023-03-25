@@ -1,8 +1,8 @@
 import { DefaultValue } from "recoil";
 
 export const localStorageEffect =
-  (key) =>
-  ({ setSelf, onSet, resetSelf }) => {
+  (key: any) =>
+  ({ setSelf, onSet, resetSelf }: any) => {
     if (typeof window === "undefined") {
       resetSelf();
       return;
@@ -12,7 +12,7 @@ export const localStorageEffect =
       setSelf(JSON.parse(savedValue));
     }
 
-    onSet((newValue) => {
+    onSet((newValue: any) => {
       if (typeof window === "undefined") return;
       if (newValue instanceof DefaultValue) {
         localStorage.removeItem(key);

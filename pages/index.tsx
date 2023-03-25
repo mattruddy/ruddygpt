@@ -64,7 +64,7 @@ export default function Home() {
                 <Quote>
                   Matt Ruddy is a highly accomplished professional with a
                   diverse background in engineering and tax. He graduated from
-                  Penn State with a Bachelor's degree in Engineering and
+                  Penn State with a Bachelor&apos;s degree in Engineering and
                   immediately began his career as an engineer, working on
                   complex projects for some of the top engineering firms in the
                   country. His experience in engineering gave him a strong
@@ -76,11 +76,12 @@ export default function Home() {
                   Despite his success as an engineer, Matt felt drawn to the
                   field of tax and decided to transition his career into this
                   new area of expertise. He went back to school to earn his
-                  Master's degree in Taxation, which allowed him to gain a
-                  deeper understanding of tax law and compliance. Matt's ability
-                  to quickly grasp complex concepts and his attention to detail
-                  made him a natural fit for the tax field, and he quickly rose
-                  through the ranks to become a respected tax specialist.
+                  Master&apos;s degree in Taxation, which allowed him to gain a
+                  deeper understanding of tax law and compliance. Matt&apos;s
+                  ability to quickly grasp complex concepts and his attention to
+                  detail made him a natural fit for the tax field, and he
+                  quickly rose through the ranks to become a respected tax
+                  specialist.
                   <br />
                   <br />
                   Throughout his career, Matt has worked with a wide variety of
@@ -92,8 +93,8 @@ export default function Home() {
                   above and beyond for his clients.
                   <br />
                   <br />
-                  Matt's passion for helping others extends beyond his work as a
-                  tax specialist. He is actively involved in his community,
+                  Matt&apos;s passion for helping others extends beyond his work
+                  as a tax specialist. He is actively involved in his community,
                   volunteering his time and resources to support local
                   organizations and causes. In his free time, Matt enjoys
                   hiking, skiing, and spending time with his family.

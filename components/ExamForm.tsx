@@ -1,7 +1,9 @@
 import { openai } from "@/config";
 import { answersState, examState } from "@/state";
-import { MultipleChoiceQuestion as MultipleChoiceQuestionType } from "@/types";
-import { formatMultipleChoiceQuestion } from "@/utils";
+import {
+  MultipleChoiceQuestion as MultipleChoiceQuestionType,
+  QuestionResponse,
+} from "@/types";
 import {
   Button,
   FormControl,
@@ -37,24 +39,22 @@ export function ExamForm() {
       setLoading(true);
       const response = await openai.createCompletion({
         model: "text-davinci-003",
-        prompt: `Create a random multiple choice exam for ${examName} with ${numberOfQuestions} questions providing all the choices with the correct answer at the end and each section having the header Question, Choices, Answer and the exact word NextQuestion`,
+        prompt: `Create a random multiple choice exam for ${examName} exam with ${numberOfQuestions} questions providing the "title" and all the "choices" with the  "answer" as the index of "choices". output this as raw json format with the question number as the key and an object with properties title, choices and answer as the value.`,
         max_tokens: 4000,
       });
-      const [choice] = response.data.choices;
-      if (choice.text) {
-        const questions = choice.text.split("NextQuestion");
-        const multipleChoiceQuestions = questions
-          .filter((txt) => txt)
-          .map(formatMultipleChoiceQuestion);
-        setAnswers({});
-        setExam({
-          name: examName ?? "",
-          numberOfQuestions: numberOfQuestions ?? 0,
-          multipleChoiceQuestions,
-        });
-      }
+      const jsonResponse = JSON.parse(
+        response.data.choices[0].text?.replace("\n", "") ?? "{}"
+      ) as QuestionResponse;
+      const questions = Object.values(jsonResponse);
+      setMultipleChoiceQuestions(questions);
+      setExam({
+        numberOfQuestions: numberOfQuestions ?? 0,
+        multipleChoiceQuestions: questions,
+        name: examName ?? "",
+      });
     } finally {
       setLoading(false);
+      setAnswers({});
     }
   };
 

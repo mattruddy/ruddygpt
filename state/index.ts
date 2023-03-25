@@ -2,7 +2,7 @@ import { MultipleChoiceQuestion } from "@/types";
 import { atom } from "recoil";
 import { localStorageEffect } from "./utils";
 
-type IMap = { [key: number]: string };
+type IMap = { [key: number]: number };
 
 interface Exam {
   name: string;

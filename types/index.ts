@@ -1,5 +1,7 @@
 export interface MultipleChoiceQuestion {
-  question: string;
+  title: string;
   choices: readonly string[];
-  answer: string;
+  answer: number;
 }
+
+export type QuestionResponse = { [key: string]: MultipleChoiceQuestion };

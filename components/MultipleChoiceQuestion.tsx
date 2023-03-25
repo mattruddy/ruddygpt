@@ -8,7 +8,6 @@ import {
   RadioGroup,
   Stack,
   Text,
-  VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
@@ -25,14 +24,16 @@ export function MultipleChoiceQuestion({
   showAnswers,
 }: Props) {
   const [answers, setAnswers] = useRecoilState(answersState);
-  const { question, choices, answer } = multipleChoiceQuestion;
+  const { title, choices, answer } = multipleChoiceQuestion;
   const [selectedChoice, setSelectedChoice] = useState(
-    answers[questionNumber] ?? ""
+    answers[questionNumber] !== undefined
+      ? choices[answers[questionNumber]]
+      : ""
   );
 
   return (
     <Card w="700px">
-      <CardHeader fontWeight={"bold"}>{question}</CardHeader>
+      <CardHeader fontWeight={"bold"}>{title}</CardHeader>
       <CardBody>
         <RadioGroup
           value={selectedChoice}
@@ -40,18 +41,18 @@ export function MultipleChoiceQuestion({
             setSelectedChoice(val);
             setAnswers({
               ...answers,
-              [questionNumber]: val,
+              [questionNumber]: choices.findIndex((choice) => choice === val),
             });
           }}
         >
           <Stack>
-            {choices.map((choice, i) => (
+            {choices?.map((choice, i) => (
               <Radio key={choice} value={choice}>
                 <Text
                   textColor={
                     showAnswers &&
-                    (selectedChoice === choice || answer.includes(choice))
-                      ? answer.includes(choice)
+                    (selectedChoice === choice || choices[answer] === choice)
+                      ? choices[answer] === choice
                         ? "green"
                         : "red"
                       : undefined

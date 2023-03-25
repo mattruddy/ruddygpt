@@ -15,7 +15,6 @@ import {
 } from "@chakra-ui/react";
 import { Quote } from "@/components/Quote";
 import { CheckIcon, CloseIcon, EmailIcon, PhoneIcon } from "@chakra-ui/icons";
-import Ticker from "react-ticker";
 import { ReactNode } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -46,7 +45,7 @@ export default function Home() {
           </HStack>
         </HStack>
         <VStack>
-          <Card w="450px">
+          <Card w="650px">
             <CardHeader>
               <HStack justify={"space-between"}>
                 <Heading size={"md"}>Matt Ruddy</Heading>
@@ -63,10 +62,41 @@ export default function Home() {
                   src="/ruddy.jpg"
                 />
                 <Quote>
-                  Matthew Ruddy, graduated from Penn State University in State
-                  College, PA. He has a reputation for providing efficient,
-                  professional accounting services and showing care to each
-                  client.
+                  Matt Ruddy is a highly accomplished professional with a
+                  diverse background in engineering and tax. He graduated from
+                  Penn State with a Bachelor's degree in Engineering and
+                  immediately began his career as an engineer, working on
+                  complex projects for some of the top engineering firms in the
+                  country. His experience in engineering gave him a strong
+                  foundation in problem-solving, critical thinking, and
+                  attention to detail, which has proven to be invaluable in his
+                  later work as a tax specialist.
+                  <br />
+                  <br />
+                  Despite his success as an engineer, Matt felt drawn to the
+                  field of tax and decided to transition his career into this
+                  new area of expertise. He went back to school to earn his
+                  Master's degree in Taxation, which allowed him to gain a
+                  deeper understanding of tax law and compliance. Matt's ability
+                  to quickly grasp complex concepts and his attention to detail
+                  made him a natural fit for the tax field, and he quickly rose
+                  through the ranks to become a respected tax specialist.
+                  <br />
+                  <br />
+                  Throughout his career, Matt has worked with a wide variety of
+                  clients, from individuals to small businesses to large
+                  corporations, helping them navigate the complexities of tax
+                  law and maximize their financial potential. He is known for
+                  his ability to simplify complex tax concepts, his commitment
+                  to providing excellent service, and his willingness to go
+                  above and beyond for his clients.
+                  <br />
+                  <br />
+                  Matt's passion for helping others extends beyond his work as a
+                  tax specialist. He is actively involved in his community,
+                  volunteering his time and resources to support local
+                  organizations and causes. In his free time, Matt enjoys
+                  hiking, skiing, and spending time with his family.
                 </Quote>
               </VStack>
             </CardBody>
@@ -76,20 +106,6 @@ export default function Home() {
               </Link>
             </CardFooter>
           </Card>
-          {/* <Box h="300px" w="100%" pt={9}>
-            <Ticker speed={4}>
-              {({ index }) => (
-                <HStack key={index}>
-                  <CarouselText>{"Devops"}</CarouselText>
-                  <CarouselText>
-                    {"Specialized Engineers (FE & BE)"}
-                  </CarouselText>
-                  <CarouselText>{"Project Managers"}</CarouselText>
-                  <CarouselText>{"Tech Leads"}</CarouselText>
-                </HStack>
-              )}
-            </Ticker>
-          </Box> */}
         </VStack>
       </VStack>
     </>

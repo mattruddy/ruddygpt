@@ -5,7 +5,7 @@ import { FaQuoteLeft } from "react-icons/fa";
 
 export function Quote({ children }: { children: React.ReactNode }) {
   return (
-    <HStack alignItems="stretch" justify="flex-start">
+    <HStack p="3" alignItems="stretch" justify="flex-start">
       <VStack w="10px" align="end" justify="stretch">
         <Icon as={FaQuoteLeft} boxSize="3" color="var(--lines)" />
         <Box

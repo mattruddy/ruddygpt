@@ -1,9 +1,13 @@
-import { openai } from "@/config";
+import { examPromptForJson, openai } from "@/config";
+
+// ...
+
 import { answersState, examState } from "@/state";
 import {
   MultipleChoiceQuestion as MultipleChoiceQuestionType,
   QuestionResponse,
 } from "@/types";
+import { ExamPayload } from "@/types/api";
 import {
   Button,
   FormControl,
@@ -14,6 +18,7 @@ import {
 import { useEffect, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { MultipleChoiceQuestion } from "./MultipleChoiceQuestion";
+import { MultipleChoiceQuestion as Question } from "./../types";
 
 export function ExamForm() {
   const setAnswers = useSetRecoilState(answersState);
@@ -37,15 +42,16 @@ export function ExamForm() {
   const handleGenerateExam = async () => {
     try {
       setLoading(true);
-      const response = await openai.createCompletion({
-        model: "text-davinci-003",
-        prompt: `Create a random multiple choice exam for ${examName} exam with ${numberOfQuestions} questions providing the "title" and all the "choices" with the  "answer" as the index of "choices". output this as raw json format with the question number as the key and an object with properties title, choices and answer as the value.`,
-        max_tokens: 4000,
+      const response = await fetch("/api/exam/generate", {
+        method: "POST",
+        body: JSON.stringify({
+          examName,
+          numberOfQuestions,
+        } as ExamPayload),
       });
-      const jsonResponse = JSON.parse(
-        response.data.choices[0].text?.replace("\n", "") ?? "{}"
-      ) as QuestionResponse;
-      const questions = Object.values(jsonResponse);
+
+      const data = (await response.json()) as Question[];
+      const questions = Object.values(data);
       setMultipleChoiceQuestions(questions);
       setExam({
         numberOfQuestions: numberOfQuestions ?? 0,

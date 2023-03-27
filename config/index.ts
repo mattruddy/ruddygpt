@@ -15,4 +15,4 @@ export const examPromptForJson = ({
   examName,
   numberOfQuestions,
 }: examPromptForJsonArgs) =>
-  `Create a random multiple choice exam for ${examName} exam with ${numberOfQuestions} questions providing the "title" and all the "choices" with the "answer" as the index of "choices". output this as a raw json array of objects with properties title, choices and answer.`;
+  `Create a random multiple choice practice exam to help study for an exam on ${examName}. Generate ${numberOfQuestions} questions. respond in the format: [{"title": string, "choices": string[], "answer": number }]`;

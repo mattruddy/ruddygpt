@@ -50,7 +50,7 @@ export function ExamForm() {
         } as ExamPayload),
       });
 
-      const data = (await response.json()) as Question[];
+      const data = (await response.json()).data as Question[];
       const questions = Object.values(data);
       setMultipleChoiceQuestions(questions);
       setExam({

@@ -1,4 +1,3 @@
-import { examPromptForJson, openai } from "@/config";
 import { answersState, apiKeyState, examState } from "@/state";
 import { MultipleChoiceQuestion as MultipleChoiceQuestionType } from "@/types";
 import {

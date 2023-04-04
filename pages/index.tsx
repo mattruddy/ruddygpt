@@ -1,9 +1,6 @@
 import Head from "next/head";
-import { Inter } from "@next/font/google";
 import { VStack } from "@chakra-ui/react";
 import { ExamForm } from "@/components/ExamForm";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (

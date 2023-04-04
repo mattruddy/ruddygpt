@@ -7,4 +7,5 @@ export type APIResponse<T> = {
 export type ExamPayload = {
   examName: string;
   numberOfQuestions: number;
+  apiKey: string;
 };

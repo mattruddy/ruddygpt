@@ -1,13 +1,6 @@
 import { examPromptForJson, openai } from "@/config";
-
-// ...
-
-import { answersState, examState } from "@/state";
-import {
-  MultipleChoiceQuestion as MultipleChoiceQuestionType,
-  QuestionResponse,
-} from "@/types";
-import { ExamPayload } from "@/types/api";
+import { answersState, apiKeyState, examState } from "@/state";
+import { MultipleChoiceQuestion as MultipleChoiceQuestionType } from "@/types";
 import {
   Button,
   FormControl,
@@ -20,15 +13,18 @@ import { useEffect, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { MultipleChoiceQuestion } from "./MultipleChoiceQuestion";
 import { MultipleChoiceQuestion as Question } from "./../types";
+import { ExamPayload } from "@/types/api";
 
 export function ExamForm() {
   const toast = useToast();
   const setAnswers = useSetRecoilState(answersState);
   const [exam, setExam] = useRecoilState(examState);
+  const [apiKeyStore, setApiKeyStore] = useRecoilState(apiKeyState);
   const [loading, setLoading] = useState(false);
   const [showAnswers, setShowAnswers] = useState(false);
   const [numberOfQuestions, setNumberOfQuestions] = useState<number>();
   const [examName, setExamName] = useState<string>();
+  const [apiKey, setApiKey] = useState<string>();
   const [multipleChoiceQuestions, setMultipleChoiceQuestions] = useState<
     MultipleChoiceQuestionType[]
   >([]);
@@ -41,14 +37,20 @@ export function ExamForm() {
     }
   }, [exam]);
 
+  useEffect(() => {
+    setApiKey(apiKeyStore);
+  }, [apiKeyStore]);
+
   const handleGenerateExam = async () => {
     try {
+      setApiKeyStore(apiKey || "");
       setLoading(true);
       const response = await fetch("/api/exam/generate", {
         method: "POST",
         body: JSON.stringify({
           examName,
           numberOfQuestions,
+          apiKey,
         } as ExamPayload),
       });
       if (response.status > 299) {
@@ -76,6 +78,10 @@ export function ExamForm() {
 
   return (
     <>
+      <FormControl>
+        <FormLabel>OpenAI API Key</FormLabel>
+        <Input value={apiKey} onChange={(e) => setApiKey(e.target.value)} />
+      </FormControl>
       <FormControl>
         <FormLabel>Number of Questions</FormLabel>
         <Input

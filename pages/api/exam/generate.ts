@@ -1,15 +1,22 @@
-import { examPromptForJson, openai } from "@/config";
-import { MultipleChoiceQuestion, QuestionResponse } from "@/types";
+import { examPromptForJson } from "@/config";
+import { MultipleChoiceQuestion } from "@/types";
 import { APIResponse, ExamPayload } from "@/types/api";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { Configuration, OpenAIApi } from "openai";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<APIResponse<MultipleChoiceQuestion[]>>
 ) {
-  const { examName, numberOfQuestions } = JSON.parse(req.body) as ExamPayload;
+  const { examName, numberOfQuestions, apiKey } = JSON.parse(
+    req.body
+  ) as ExamPayload;
   console.log(req.body.examName);
   try {
+    const openAIConfig = new Configuration({
+      apiKey,
+    });
+    const openai = new OpenAIApi(openAIConfig);
     const response = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [

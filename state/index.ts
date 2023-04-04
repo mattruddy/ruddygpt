@@ -21,3 +21,9 @@ export const answersState = atom({
   default: {} as IMap,
   effects_UNSTABLE: [localStorageEffect("answers")],
 });
+
+export const apiKeyState = atom({
+  key: "api-key-state",
+  default: "",
+  effects_UNSTABLE: [localStorageEffect("api-key")],
+});

@@ -54,9 +54,10 @@ export function ExamForm() {
         } as ExamPayload),
       });
       if (response.status > 299) {
+        const body = await response.json();
         toast({
           title: "Error",
-          description: response.statusText,
+          description: body.message,
           status: "error",
           isClosable: true,
         });

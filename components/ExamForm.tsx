@@ -13,6 +13,7 @@ import {
   FormControl,
   FormLabel,
   Input,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
@@ -21,6 +22,7 @@ import { MultipleChoiceQuestion } from "./MultipleChoiceQuestion";
 import { MultipleChoiceQuestion as Question } from "./../types";
 
 export function ExamForm() {
+  const toast = useToast();
   const setAnswers = useSetRecoilState(answersState);
   const [exam, setExam] = useRecoilState(examState);
   const [loading, setLoading] = useState(false);
@@ -49,7 +51,15 @@ export function ExamForm() {
           numberOfQuestions,
         } as ExamPayload),
       });
-
+      if (response.status > 299) {
+        toast({
+          title: "Error",
+          description: response.statusText,
+          status: "error",
+          isClosable: true,
+        });
+        return;
+      }
       const data = (await response.json()).data as Question[];
       const questions = Object.values(data);
       setMultipleChoiceQuestions(questions);
